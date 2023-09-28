@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import PlatoScreen from './src/screens/PlatoScreen';
+import Menu from './src/screens/Menu';
 
 const Stack = createNativeStackNavigator()
 
@@ -11,6 +12,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name='Login' component={Login}
+          options={() => ({
+            title: "Login",
+            headerStyle: {
+              backgroundColor: 'lightblue'
+            }
+          })}
+        />
         <Stack.Screen name='Home' component={Home}
           options={({navigation}) => ({
             title: "Home",
@@ -23,19 +32,19 @@ export default function App() {
               </TouchableOpacity>
             )
         })} />
-        <Stack.Screen name='Login' component={Login}
-          options={() => ({
-            title: "Login",
-            headerStyle: {
-              backgroundColor: 'lightblue'
-            }
-          })}
-        />
         <Stack.Screen name='Plato' component={PlatoScreen}
           options={() => ({
             title: "Plato",
             headerStyle: {
               backgroundColor: 'lightgreen'
+            }
+          })}
+        />
+        <Stack.Screen name='Menu' component={Menu}
+          options={() => ({
+            title: "Menu",
+            headerStyle: {
+              backgroundColor: 'peru'
             }
           })}
         />

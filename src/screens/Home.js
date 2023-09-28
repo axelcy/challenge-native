@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View, RefreshControl, TextInput, ScrollView } from 'react-native';
+import { FlatList, StyleSheet, Text, View, RefreshControl, TextInput, ScrollView, Button } from 'react-native';
 import Plato from '../components/Plato'
 import { useEffect, useRef, useState } from 'react'
 import useFetch from '../hooks/useFetch';
@@ -39,12 +39,16 @@ const Home = ({ navigation }) => {
     return (
         <Layout>
             <Text>Home</Text>
+            <View style={{width: '100%'}}>
+                <Button title="Ver tus platos (menu)" onPress={() => navigation.navigate('Menu')} />
+            </View>
             <TextInput 
                 placeholder='Buscar plato...'
                 style={styles.textInput}
                 onChangeText={handleChange}
                 value={busqueda}
             />
+            
             <ScrollView style={{ flex: 1 }}>
                 <FlatList
                     nestedScrollEnabled={true}
