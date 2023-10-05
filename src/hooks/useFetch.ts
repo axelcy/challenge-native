@@ -2,7 +2,7 @@ import mockData from "../mocks/data"
 
 const API = 'https://api.spoonacular.com/recipes/complexSearch?apiKey=3762930b913b46e2a8d5de5d687bfcd0'
 
-export default async function useFetch(hardcodeado: Boolean, id: number) {
+export default async function useFetch(hardcodeado: Boolean, id: number): Promise<any> {
     var result = null
     if (hardcodeado) result = mockData  
     try {
@@ -13,7 +13,7 @@ export default async function useFetch(hardcodeado: Boolean, id: number) {
         console.error(error)
     }
     if (id) return result.results.find((plato: Result) => plato.id === id)
-    return result.results
+    return result.results as Promise<Result[]>
 }
 
 export interface APIResponse {
