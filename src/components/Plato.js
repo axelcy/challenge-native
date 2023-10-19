@@ -2,11 +2,14 @@ import { useContext } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
 import MenuContext from '../context/MenuContext';
 
-export default function Plato({ id, title, image, handlePress, agregar }) {
+export default function Plato({ id, title, image, handlePress, agregar, eliminar }) {
     const { menu, setMenu } = useContext(MenuContext)
     const handleAgregar = ({ navigation }) => {
         setMenu(menu => [...menu, {id, title, image}])
         navigation.navigate('Home')
+    }
+    const handleEliminar = () => {
+        setMenu(menu => menu.filter((plato, index) => id !== index))
     }
     return (
         <>
@@ -19,6 +22,7 @@ export default function Plato({ id, title, image, handlePress, agregar }) {
             
         </TouchableOpacity>
         { agregar && <Button onPress={handleAgregar} title='Agregar al menu' />}
+        {/* { eliminar && <Button onPress={handleEliminar} title='Eliminar del menu' />} */}
         </>
     )
 }

@@ -22,7 +22,7 @@ const Menu = () => {
                     nestedScrollEnabled={true}
                     contentContainerStyle={styles.listaPlatos}
                     data={menu}
-                    renderItem={({ item }) => <Plato {...item} />}
+                    renderItem={({ item }) => <Plato {...item} eliminar />}
                     keyExtractor={item => item.id}
                 />
             </ScrollView>
