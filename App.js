@@ -5,12 +5,17 @@ import Home from './src/screens/Home';
 import Login from './src/screens/Login';
 import PlatoScreen from './src/screens/PlatoScreen';
 import Menu from './src/screens/Menu';
+import { UserProvider } from './src/context/UserContext';
+import { MenuProvider } from './src/context/MenuContext';
 
 const Stack = createNativeStackNavigator()
 
 export default function App() {
+
   return (
-    <NavigationContainer>
+    <UserProvider>
+      <MenuProvider>
+      <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen name='Login' component={Login}
           options={() => ({
@@ -27,8 +32,10 @@ export default function App() {
               backgroundColor: 'lightcoral'
             },
             headerRight: () => (
-              <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                <Text style={styles.headerRight}>Ir a Login</Text>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate('Login')
+              }}>
+                <Text style={styles.headerRight}>Log Out</Text>
               </TouchableOpacity>
             )
         })} />
@@ -50,6 +57,8 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+      </MenuProvider>
+    </UserProvider>
   )
 }
 

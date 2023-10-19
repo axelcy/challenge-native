@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import Layout from '../components/Layout';
+import UserContext from '../context/UserContext';
 
 const Form = ({ navigation }) => {
+    const { user, setUser } = useContext(UserContext)
+
+    useEffect(() => setUser(null), [])
+
     const [sesion, setSesion] = useState({})
     const [error, setError] = useState('')
 
@@ -19,6 +24,7 @@ const Form = ({ navigation }) => {
                     body: JSON.stringify(sesion)
                 })
                 if (!response.ok) throw new Error('NO AUTORIZADO')
+                setUser(sesion)
                 navigation.navigate('Home')
             } catch (error) {
                 setError('NO AUTORIZADO')

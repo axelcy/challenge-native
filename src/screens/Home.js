@@ -1,10 +1,13 @@
 import { FlatList, StyleSheet, Text, View, RefreshControl, TextInput, ScrollView, Button } from 'react-native';
 import Plato from '../components/Plato'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import useFetch from '../hooks/useFetch';
 import Layout from '../components/Layout';
+import UserContext from '../context/UserContext';
 
 const Home = ({ navigation }) => {
+    const { user } = useContext(UserContext)
+
     const [listaPlatos, setListaPlatos] = useState([])
 
     const [refreshing, setRefreshing] = useState(false)
@@ -19,7 +22,9 @@ const Home = ({ navigation }) => {
         setPlatosFiltrados(platos)
     }
 
-    useEffect(() => { buscarPlatos() }, [])
+    useEffect(() => {
+        buscarPlatos()
+     }, [])
 
     useEffect(() => { // filtrar platos
         if (!busqueda) return

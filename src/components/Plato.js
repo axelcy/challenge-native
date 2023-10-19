@@ -1,14 +1,25 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { useContext } from 'react';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Button } from 'react-native';
+import MenuContext from '../context/MenuContext';
 
-export default function Plato({ id, title, image, handlePress }) {
+export default function Plato({ id, title, image, handlePress, agregar }) {
+    const { menu, setMenu } = useContext(MenuContext)
+    const handleAgregar = ({ navigation }) => {
+        setMenu(menu => [...menu, {id, title, image}])
+        navigation.navigate('Home')
+    }
     return (
+        <>
         <TouchableOpacity style={styles.container} onPress={handlePress}>
             {
                 image ? <Image source={{uri: image}} style={styles.image} /> :
                 <Image source={require('/assets/cargando.png')} style={styles.image} />
             }
             <Text style={styles.title}>{title || 'Cargando...'}</Text>
+            
         </TouchableOpacity>
+        { agregar && <Button onPress={handleAgregar} title='Agregar al menu' />}
+        </>
     )
 }
 // Cargando
